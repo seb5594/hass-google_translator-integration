@@ -42,9 +42,19 @@ Budget-Warnung in der Google Cloud Console ein.
 
 ## Installation
 
-Installiere sie über HACS (dieses Repository als benutzerdefiniertes Repository vom Typ *Integration*
-hinzufügen) oder kopiere `custom_components/google_translator` in den Ordner `custom_components` deiner
-Konfiguration und starte Home Assistant neu.
+### HACS oder Marketplace
+
+1. Suche in HACS (Home Assistant 2026.10 und älter) oder unter **Einstellungen → Marketplace**
+   (2026.11 und neuer) nach **Google Translator**, oder nutze das Badge *HACS · Marketplace* oben.
+2. Lade die Integration herunter und starte Home Assistant neu.
+
+Findet die Suche sie nicht, füge `https://github.com/seb5594/hass-google_translator-integration` am selben Ort als
+benutzerdefiniertes Repository hinzu (Kategorie *Integration*) und lade sie von dort herunter.
+
+### Manuell
+
+Kopiere `custom_components/google_translator` in den Ordner `custom_components` deiner Konfiguration und
+starte Home Assistant neu.
 
 ## Einrichtung
 

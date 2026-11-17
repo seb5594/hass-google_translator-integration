@@ -60,9 +60,19 @@ same key elsewhere are not included. Set a billing budget alert in the Google Cl
 
 ## Installation
 
-Install it with HACS (add this repository as a custom repository of the type *Integration*), or copy
-`custom_components/google_translator` into the `custom_components` folder of your configuration and
-restart Home Assistant.
+### HACS or Marketplace
+
+1. Search for **Google Translator** in HACS (Home Assistant 2026.10 and older) or in
+   **Settings → Marketplace** (2026.11 and newer), or use the *HACS · Marketplace* badge above.
+2. Download it and restart Home Assistant.
+
+If the search does not find it, add `https://github.com/seb5594/hass-google_translator-integration` as a custom repository
+(category *Integration*) in the same place and download it from there.
+
+### Manual
+
+Copy `custom_components/google_translator` into the `custom_components` folder of your
+configuration and restart Home Assistant.
 
 ## Setup
 
