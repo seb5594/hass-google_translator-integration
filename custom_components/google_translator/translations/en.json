@@ -1,0 +1,205 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Choose how to reach Google Translate",
+        "description": "Without an account, the same free service that translate.google.com uses works out of the box. For heavy or business use, an API key for the Cloud Translation API is the reliable choice.",
+        "menu_options": {
+          "web": "Free, no account (translate.google.com)",
+          "cloud": "Cloud Translation API (API key)"
+        }
+      },
+      "web": {
+        "title": "Google Translate without an account",
+        "description": "This uses the keyless endpoint behind translate.google.com. It is free, but unofficial: Google may limit or change it at any time, so it suits occasional translations. Select Submit to test it.",
+        "data": {
+          "default_target_language": "Default target language"
+        }
+      },
+      "cloud": {
+        "title": "Cloud Translation API",
+        "description": "Create an API key under APIs & Services > Credentials in the Google Cloud console and enable the Cloud Translation API for the project. The first 500,000 characters per month are free, but Google requires a billing account.",
+        "data": {
+          "api_key": "API key",
+          "default_target_language": "Default target language",
+          "monthly_character_limit": "Monthly character limit"
+        },
+        "data_description": {
+          "monthly_character_limit": "Translations that would exceed this many characters in a month are refused before anything is sent. Use 0 for no limit. The Cloud API is free up to 500,000 characters per month."
+        }
+      },
+      "reauth_confirm": {
+        "title": "Sign in to Google again",
+        "description": "Google no longer accepts the API key of {account}. Enter a new one.",
+        "data": {
+          "api_key": "API key"
+        }
+      },
+      "discovery_confirm": {
+        "title": "Set up Google Translator",
+        "description": "Google Translator was found on this Home Assistant server. Select Submit to choose how to reach Google Translate. Without an account, the translation actions are not available."
+      }
+    },
+    "error": {
+      "invalid_auth": "Google rejected the API key. Check the key and that the Cloud Translation API is enabled for its project.",
+      "cannot_connect": "Google could not be reached. Check the internet connection and try again.",
+      "rate_limited": "Google is limiting requests right now. Wait a few minutes or use an API key.",
+      "unknown": "Something unexpected went wrong. Check the log for details."
+    },
+    "abort": {
+      "already_configured": "This Google account is already set up.",
+      "reauth_successful": "The new API key works.",
+      "not_local_instance": "This Home Assistant advertisement belongs to another server.",
+      "invalid_yaml": "The YAML configuration is invalid. Check the options in configuration.yaml."
+    },
+    "flow_title": "{name}"
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Google Translator options",
+        "description": "Changes are applied when the account reloads. Values set in configuration.yaml are applied again at every start.",
+        "data": {
+          "discover_translator": "Offer Custom Integration Translator",
+          "default_target_language": "Default target language",
+          "monthly_character_limit": "Monthly character limit",
+          "cache_size": "Cache size"
+        },
+        "data_description": {
+          "discover_translator": "Suggest setting up the optional Custom Integration Translator when it is installed.",
+          "monthly_character_limit": "Translations that would exceed this many characters in a month are refused before anything is sent. Use 0 for no limit. The Cloud API is free up to 500,000 characters per month.",
+          "cache_size": "Number of translations kept in memory. 0 turns the cache off."
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "characters_used": {
+        "name": "Characters used this month"
+      },
+      "characters_limit": {
+        "name": "Monthly character limit"
+      },
+      "characters_remaining": {
+        "name": "Characters remaining"
+      },
+      "usage_percent": {
+        "name": "Budget used"
+      },
+      "period_end": {
+        "name": "Counting period end"
+      }
+    }
+  },
+  "services": {
+    "translate_text": {
+      "name": "Translate text",
+      "description": "Translates one or more texts with Google Translate and returns the result.",
+      "fields": {
+        "text": {
+          "name": "Text",
+          "description": "The text to translate. Use a list to translate several texts in one request."
+        },
+        "target_language": {
+          "name": "Target language",
+          "description": "Language to translate into. Defaults to the one chosen for the integration."
+        },
+        "source_language": {
+          "name": "Source language",
+          "description": "Language of the text. Leave empty to let Google detect it."
+        },
+        "config_entry_id": {
+          "name": "Account",
+          "description": "The Google account to use. Only needed when several are set up."
+        }
+      }
+    },
+    "translate_structure": {
+      "name": "Translate structure",
+      "description": "Translates only the text values of JSON or YAML data and keeps its structure. Files keep their exact layout, including indentation, key order, quoting and comments; keys are never translated.",
+      "fields": {
+        "data": {
+          "name": "Data",
+          "description": "Structured data to translate. Use this or an input file."
+        },
+        "input_file": {
+          "name": "Input file",
+          "description": "A JSON or YAML file to translate. Relative paths start in the configuration folder."
+        },
+        "output_file": {
+          "name": "Output file",
+          "description": "Where to store the translated file. Defaults to the input name with the target language added, for example en.de.json."
+        },
+        "format": {
+          "name": "Format",
+          "description": "File format. Auto guesses it from the file extension."
+        },
+        "only_keys": {
+          "name": "Only keys",
+          "description": "Translate only values that belong to these keys, for example name, title and message. Recommended for configuration files, where most values are technical."
+        },
+        "ignore_keys": {
+          "name": "Ignore keys",
+          "description": "Never translate values that belong to these keys."
+        },
+        "skip_technical_values": {
+          "name": "Skip technical values",
+          "description": "Leave URLs, entity IDs, icons, colors, version numbers and similar identifiers alone."
+        },
+        "protect_placeholders": {
+          "name": "Protect placeholders",
+          "description": "Keep placeholders such as {name}, %s and {{ template }} unchanged."
+        },
+        "dry_run": {
+          "name": "Dry run",
+          "description": "List the texts that would be translated and count their characters, without contacting Google."
+        },
+        "overwrite": {
+          "name": "Overwrite",
+          "description": "Replace the output file if it already exists."
+        },
+        "target_language": {
+          "name": "Target language",
+          "description": "Language to translate into. Defaults to the one chosen for the integration."
+        },
+        "source_language": {
+          "name": "Source language",
+          "description": "Language of the text. Leave empty to let Google detect it."
+        },
+        "config_entry_id": {
+          "name": "Account",
+          "description": "The Google account to use. Only needed when several are set up."
+        }
+      }
+    },
+    "get_languages": {
+      "name": "Get languages",
+      "description": "Lists the languages Google Translate supports.",
+      "fields": {
+        "type": {
+          "name": "Type",
+          "description": "Google offers the same languages as source and target."
+        },
+        "config_entry_id": {
+          "name": "Account",
+          "description": "The Google account to use. Only needed when several are set up."
+        }
+      }
+    },
+    "get_usage": {
+      "name": "Get usage",
+      "description": "Returns the characters counted this month and what is left of the monthly limit. Google reports no usage itself, so the figures are counted by this integration.",
+      "fields": {
+        "refresh": {
+          "name": "Refresh",
+          "description": "Start a new counting period if the month has changed before answering."
+        },
+        "config_entry_id": {
+          "name": "Account",
+          "description": "The Google account to use. Only needed when several are set up."
+        }
+      }
+    }
+  }
+}

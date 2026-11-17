@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect x="24" y="24" width="464" height="464" rx="104" fill="#1B9E77"/>
+  <g font-family="'DejaVu Sans', 'Helvetica Neue', Arial, sans-serif" font-weight="700" text-anchor="middle">
+    <path d="M118 132h170a40 40 0 0 1 40 40v70a40 40 0 0 1-40 40H190l-62 50 14-50h-24a40 40 0 0 1-40-40v-70a40 40 0 0 1 40-40z" fill="#FFFFFF"/>
+    <text x="196" y="226" font-size="104" fill="#0B3B2E">A</text>
+    <path d="M224 262h170a40 40 0 0 1 40 40v70a40 40 0 0 1-40 40h-24l14 50-62-50H224a40 40 0 0 1-40-40v-70a40 40 0 0 1 40-40z" fill="#0B3B2E" stroke="#1B9E77" stroke-width="12" paint-order="stroke"/>
+    <text x="309" y="356" font-size="104" fill="#FFFFFF">α</text>
+  </g>
+</svg>
