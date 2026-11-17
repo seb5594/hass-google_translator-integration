@@ -1,0 +1,205 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Zugang zu Google Übersetzer wählen",
+        "description": "Ohne Konto funktioniert sofort derselbe kostenlose Dienst wie auf translate.google.com. Für viele oder geschäftliche Übersetzungen ist ein API-Schlüssel für die Cloud Translation API die verlässlichere Wahl.",
+        "menu_options": {
+          "web": "Kostenlos, ohne Konto (translate.google.com)",
+          "cloud": "Cloud Translation API (API-Schlüssel)"
+        }
+      },
+      "web": {
+        "title": "Google Übersetzer ohne Konto",
+        "description": "Dies nutzt den schlüsselfreien Zugang hinter translate.google.com. Er ist kostenlos, aber inoffiziell: Google kann ihn jederzeit begrenzen oder ändern, daher eignet er sich für gelegentliche Übersetzungen. Wähle Senden, um ihn zu testen.",
+        "data": {
+          "default_target_language": "Standard-Zielsprache"
+        }
+      },
+      "cloud": {
+        "title": "Cloud Translation API",
+        "description": "Erstelle in der Google Cloud Console unter APIs & Dienste > Anmeldedaten einen API-Schlüssel und aktiviere die Cloud Translation API für das Projekt. Die ersten 500.000 Zeichen pro Monat sind kostenlos, Google verlangt dafür aber ein Rechnungskonto.",
+        "data": {
+          "api_key": "API-Schlüssel",
+          "default_target_language": "Standard-Zielsprache",
+          "monthly_character_limit": "Monatliches Zeichenlimit"
+        },
+        "data_description": {
+          "monthly_character_limit": "Übersetzungen, die das Limit im Monat überschreiten würden, werden abgelehnt, bevor etwas gesendet wird. 0 bedeutet kein Limit. Die Cloud API ist bis 500.000 Zeichen pro Monat kostenlos."
+        }
+      },
+      "reauth_confirm": {
+        "title": "Erneut bei Google anmelden",
+        "description": "Google akzeptiert den API-Schlüssel von {account} nicht mehr. Gib einen neuen ein.",
+        "data": {
+          "api_key": "API-Schlüssel"
+        }
+      },
+      "discovery_confirm": {
+        "title": "Google Translator einrichten",
+        "description": "Google Translator wurde auf diesem Home-Assistant-Server gefunden. Wähle Senden, um den Zugang zu Google Übersetzer festzulegen. Ohne Einrichtung stehen die Übersetzungsaktionen nicht zur Verfügung."
+      }
+    },
+    "error": {
+      "invalid_auth": "Google hat den API-Schlüssel abgelehnt. Prüfe den Schlüssel und ob die Cloud Translation API für sein Projekt aktiviert ist.",
+      "cannot_connect": "Google ist nicht erreichbar. Prüfe die Internetverbindung und versuche es erneut.",
+      "rate_limited": "Google begrenzt gerade die Anfragen. Warte einige Minuten oder nutze einen API-Schlüssel.",
+      "unknown": "Etwas Unerwartetes ist schiefgelaufen. Details stehen im Protokoll."
+    },
+    "abort": {
+      "already_configured": "Dieses Google-Konto ist bereits eingerichtet.",
+      "reauth_successful": "Der neue API-Schlüssel funktioniert.",
+      "not_local_instance": "Diese Home-Assistant-Ankündigung gehört zu einem anderen Server.",
+      "invalid_yaml": "Die YAML-Konfiguration ist ungültig. Prüfe die Optionen in configuration.yaml."
+    },
+    "flow_title": "{name}"
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Optionen von Google Translator",
+        "description": "Änderungen gelten, sobald das Konto neu geladen wird. Werte aus configuration.yaml werden bei jedem Start erneut angewendet.",
+        "data": {
+          "discover_translator": "Custom Integration Translator anbieten",
+          "default_target_language": "Standard-Zielsprache",
+          "monthly_character_limit": "Monatliches Zeichenlimit",
+          "cache_size": "Cache-Größe"
+        },
+        "data_description": {
+          "discover_translator": "Die Einrichtung des optionalen Custom Integration Translator vorschlagen, wenn er installiert ist.",
+          "monthly_character_limit": "Übersetzungen, die das Limit im Monat überschreiten würden, werden abgelehnt, bevor etwas gesendet wird. 0 bedeutet kein Limit. Die Cloud API ist bis 500.000 Zeichen pro Monat kostenlos.",
+          "cache_size": "Anzahl der im Speicher gehaltenen Übersetzungen. 0 schaltet den Cache aus."
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "characters_used": {
+        "name": "Zeichen in diesem Monat"
+      },
+      "characters_limit": {
+        "name": "Monatliches Zeichenlimit"
+      },
+      "characters_remaining": {
+        "name": "Verbleibende Zeichen"
+      },
+      "usage_percent": {
+        "name": "Budget verbraucht"
+      },
+      "period_end": {
+        "name": "Ende des Zählzeitraums"
+      }
+    }
+  },
+  "services": {
+    "translate_text": {
+      "name": "Text übersetzen",
+      "description": "Übersetzt einen oder mehrere Texte mit Google Übersetzer und gibt das Ergebnis zurück.",
+      "fields": {
+        "text": {
+          "name": "Text",
+          "description": "Der zu übersetzende Text. Mit einer Liste lassen sich mehrere Texte in einer Anfrage übersetzen."
+        },
+        "target_language": {
+          "name": "Zielsprache",
+          "description": "Sprache, in die übersetzt wird. Standard ist die für die Integration gewählte."
+        },
+        "source_language": {
+          "name": "Quellsprache",
+          "description": "Sprache des Textes. Leer lassen, damit Google sie erkennt."
+        },
+        "config_entry_id": {
+          "name": "Konto",
+          "description": "Das zu verwendende Google-Konto. Nur nötig, wenn mehrere eingerichtet sind."
+        }
+      }
+    },
+    "translate_structure": {
+      "name": "Struktur übersetzen",
+      "description": "Übersetzt nur die Textwerte von JSON- oder YAML-Daten und behält die Struktur bei. Dateien behalten ihr exaktes Layout samt Einrückung, Schlüsselreihenfolge, Anführungszeichen und Kommentaren; Schlüssel werden nie übersetzt.",
+      "fields": {
+        "data": {
+          "name": "Daten",
+          "description": "Strukturierte Daten zum Übersetzen. Nutze dies oder eine Eingabedatei."
+        },
+        "input_file": {
+          "name": "Eingabedatei",
+          "description": "Eine zu übersetzende JSON- oder YAML-Datei. Relative Pfade beginnen im Konfigurationsordner."
+        },
+        "output_file": {
+          "name": "Ausgabedatei",
+          "description": "Wohin die übersetzte Datei geschrieben wird. Standard ist der Eingabename mit angehängter Zielsprache, zum Beispiel en.de.json."
+        },
+        "format": {
+          "name": "Format",
+          "description": "Dateiformat. Auto erkennt es an der Dateiendung."
+        },
+        "only_keys": {
+          "name": "Nur Schlüssel",
+          "description": "Nur Werte übersetzen, die zu diesen Schlüsseln gehören, zum Beispiel name, title und message. Empfohlen für Konfigurationsdateien, in denen die meisten Werte technisch sind."
+        },
+        "ignore_keys": {
+          "name": "Schlüssel ignorieren",
+          "description": "Werte, die zu diesen Schlüsseln gehören, nie übersetzen."
+        },
+        "skip_technical_values": {
+          "name": "Technische Werte überspringen",
+          "description": "URLs, Entitäts-IDs, Symbole, Farben, Versionsnummern und ähnliche Kennungen unverändert lassen."
+        },
+        "protect_placeholders": {
+          "name": "Platzhalter schützen",
+          "description": "Platzhalter wie {name}, %s und {{ template }} unverändert lassen."
+        },
+        "dry_run": {
+          "name": "Testlauf",
+          "description": "Die zu übersetzenden Texte auflisten und ihre Zeichen zählen, ohne Google zu kontaktieren."
+        },
+        "overwrite": {
+          "name": "Überschreiben",
+          "description": "Die Ausgabedatei ersetzen, falls sie schon existiert."
+        },
+        "target_language": {
+          "name": "Zielsprache",
+          "description": "Sprache, in die übersetzt wird. Standard ist die für die Integration gewählte."
+        },
+        "source_language": {
+          "name": "Quellsprache",
+          "description": "Sprache des Textes. Leer lassen, damit Google sie erkennt."
+        },
+        "config_entry_id": {
+          "name": "Konto",
+          "description": "Das zu verwendende Google-Konto. Nur nötig, wenn mehrere eingerichtet sind."
+        }
+      }
+    },
+    "get_languages": {
+      "name": "Sprachen abrufen",
+      "description": "Listet die von Google Übersetzer unterstützten Sprachen auf.",
+      "fields": {
+        "type": {
+          "name": "Typ",
+          "description": "Google bietet dieselben Sprachen als Quelle und als Ziel an."
+        },
+        "config_entry_id": {
+          "name": "Konto",
+          "description": "Das zu verwendende Google-Konto. Nur nötig, wenn mehrere eingerichtet sind."
+        }
+      }
+    },
+    "get_usage": {
+      "name": "Verbrauch abrufen",
+      "description": "Gibt die in diesem Monat gezählten Zeichen und den Rest des Monatslimits zurück. Google meldet keinen Verbrauch, die Werte zählt diese Integration selbst.",
+      "fields": {
+        "refresh": {
+          "name": "Aktualisieren",
+          "description": "Vor der Antwort einen neuen Zählzeitraum beginnen, falls der Monat gewechselt hat."
+        },
+        "config_entry_id": {
+          "name": "Konto",
+          "description": "Das zu verwendende Google-Konto. Nur nötig, wenn mehrere eingerichtet sind."
+        }
+      }
+    }
+  }
+}
