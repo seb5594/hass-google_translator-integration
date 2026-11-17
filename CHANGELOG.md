@@ -2,6 +2,7 @@
 
 ## 2026.11.17.1
 
+- Published under the MIT license.
 - First release of Google Translator for Home Assistant 2023.7 and newer.
 - Two ways to reach Google Translate: the keyless web endpoint that translate.google.com uses (free,
   unofficial) or the official Cloud Translation API with an API key.
