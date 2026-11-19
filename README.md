@@ -8,8 +8,8 @@
 <p align="center">
   <a href="https://my.home-assistant.io/redirect/hacs_repository/?owner=seb5594&amp;repository=hass-google_translator-integration&amp;category=integration"><img src="https://img.shields.io/static/v1?label=HACS%20%C2%B7%20Marketplace&amp;message=Add%20integration&amp;color=41BDF5&amp;logo=homeassistantcommunitystore&amp;logoColor=white&amp;style=for-the-badge" alt="HACS · Marketplace" height="28"></a>
   <a href="https://github.com/seb5594/hass-google_translator-integration/actions/workflows/compat.yml"><img src="https://img.shields.io/static/v1?label=home%20assistant&amp;message=%E2%89%A5%202023.7.0&amp;color=1877A5&amp;style=for-the-badge" alt="home assistant" height="28"></a><br>
-  <a href="https://github.com/seb5594/hass-google_translator-integration/releases/tag/v2026.11.17.1"><img src="https://img.shields.io/static/v1?label=integration%20version&amp;message=2026.11.17.1&amp;color=1877A5&amp;style=for-the-badge" alt="integration version" height="28"></a>
-  <a href="https://github.com/seb5594/hass-google_translator-integration/releases"><img src="https://img.shields.io/github/downloads/seb5594/hass-google_translator-integration/v2026.11.17.1/total?label=downloads&amp;color=1877A5&amp;style=for-the-badge" alt="downloads" height="28"></a><br>
+  <a href="https://github.com/seb5594/hass-google_translator-integration/releases/tag/2026.19.11"><img src="https://img.shields.io/static/v1?label=integration%20version&amp;message=2026.19.11&amp;color=1877A5&amp;style=for-the-badge" alt="integration version" height="28"></a>
+  <a href="https://github.com/seb5594/hass-google_translator-integration/releases"><img src="https://img.shields.io/github/downloads/seb5594/hass-google_translator-integration/2026.19.11/total?label=downloads&amp;color=1877A5&amp;style=for-the-badge" alt="downloads" height="28"></a><br>
   <a href="https://github.com/seb5594/hass-google_translator-integration/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/seb5594/hass-google_translator-integration/ci.yml?branch=main&amp;label=checks&amp;style=flat" alt="checks" height="20"></a>
   <img src="https://img.shields.io/static/v1?label=tests&amp;message=23%20passed&amp;color=2F855A&amp;style=flat" alt="tests" height="20">
   <a href="https://github.com/seb5594/hass-google_translator-integration/issues"><img src="https://img.shields.io/github/issues/seb5594/hass-google_translator-integration?label=issues&amp;style=flat" alt="issues" height="20"></a><br>
@@ -191,6 +191,8 @@ Turn the offer off with `discover_translator: false` or in the options.
 - Google, Google Translate and Google Cloud are trademarks of Google LLC. This project is not
   affiliated with or endorsed by Google.
 
+Versions use `YYYY.DD.MM` for the first build of a day, followed by `YYYY.DD.MM.2`, `.3`, and so on. Release tags have no prefix.
+
 <!-- support:begin (generated, shared text) -->
 ## Say thanks
 
@@ -208,6 +210,3 @@ If my work helped you or turned out to be useful, show your appreciation with a 
 
 Published under the [MIT License](LICENSE).
 <!-- license:end -->
-
-
-Versions use `YYYY.DD.MM` for the first build of a day, followed by `YYYY.DD.MM.2`, `.3`, and so on. Release tags have no prefix.
