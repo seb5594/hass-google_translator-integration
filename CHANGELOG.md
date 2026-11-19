@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026.19.11
+
+- Use YYYY.DD.MM for the first daily build and .2, .3 for subsequent builds.
+- Publish release tags without the v prefix.
+
+
 ## 2026.11.17.1
 
 - Published under the MIT license.

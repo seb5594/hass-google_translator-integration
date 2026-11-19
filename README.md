@@ -208,3 +208,6 @@ If my work helped you or turned out to be useful, show your appreciation with a 
 
 Published under the [MIT License](LICENSE).
 <!-- license:end -->
+
+
+Versions use `YYYY.DD.MM` for the first build of a day, followed by `YYYY.DD.MM.2`, `.3`, and so on. Release tags have no prefix.

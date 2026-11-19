@@ -37,9 +37,12 @@ class IntegrationLayout(unittest.TestCase):
 
     def test_version_follows_the_calendar_scheme(self):
         version = json.loads((COMPONENT / "manifest.json").read_text())["version"]
-        year, month, day, build = (int(part) for part in version.split("."))
+        parts = [int(part) for part in version.split(".")]
+        year, day, month = parts[:3]
+        build = parts[3] if len(parts) == 4 else 1
         datetime(year, month, day)  # raises for an impossible date
         self.assertGreaterEqual(build, 1)
+        self.assertNotEqual(version.split(".")[-1], "1")
 
     def test_hacs_zip_is_named_after_the_domain(self):
         hacs = json.loads((ROOT / "hacs.json").read_text())
