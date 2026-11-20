@@ -192,4 +192,4 @@ Published under the [MIT License](LICENSE).
 <!-- license:end -->
 
 
-Versions use `YYYY.DD.MM` for the first build of a day, followed by `YYYY.DD.MM.2`, `.3`, and so on. Release tags have no prefix.
+Versions use `YYYY.MM.DD` for the first build of a day, followed by `YYYY.MM.DD.1`, `.2`, and so on. Release tags have no prefix.

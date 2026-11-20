@@ -191,7 +191,7 @@ Turn the offer off with `discover_translator: false` or in the options.
 - Google, Google Translate and Google Cloud are trademarks of Google LLC. This project is not
   affiliated with or endorsed by Google.
 
-Versions use `YYYY.DD.MM` for the first build of a day, followed by `YYYY.DD.MM.2`, `.3`, and so on. Release tags have no prefix.
+Versions use `YYYY.MM.DD` for the first build of a day, followed by `YYYY.MM.DD.1`, `.2`, and so on. Release tags have no prefix.
 
 <!-- support:begin (generated, shared text) -->
 ## Say thanks
