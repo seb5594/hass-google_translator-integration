@@ -67,6 +67,9 @@ from .data import GoogleRuntimeData
 from .languages import COMMON_LANGUAGES, normalize_language, source_language
 from .translator import async_run_plan, plan_translation
 
+# The only existing files a translation may replace.
+OVERWRITABLE_SUFFIXES = frozenset({".json"})
+
 _ENTRY_FIELD = {vol.Optional(ATTR_CONFIG_ENTRY_ID): cv.string}
 
 TRANSLATE_TEXT_SCHEMA = vol.Schema(
@@ -399,10 +402,18 @@ def _read_input(
     if output_file is not None:
         if input_file.resolve() == output_file.resolve():
             raise ServiceValidationError("The output file must differ from the input file")
-        if output_file.exists() and not overwrite:
-            raise ServiceValidationError(
-                f"{output_file} already exists, set '{ATTR_OVERWRITE}' to replace it"
-            )
+        if output_file.exists():
+            # YAML files hold the configuration, automations and secrets of Home Assistant, so a
+            # translation may create them but never replace one. Only JSON can be overwritten.
+            if output_file.suffix.lower() not in OVERWRITABLE_SUFFIXES:
+                raise ServiceValidationError(
+                    f"{output_file} already exists and only JSON files can be replaced. "
+                    "Choose another output file"
+                )
+            if not overwrite:
+                raise ServiceValidationError(
+                    f"{output_file} already exists, set '{ATTR_OVERWRITE}' to replace it"
+                )
     if input_file.stat().st_size > MAX_DOCUMENT_BYTES:
         raise ServiceValidationError(
             f"{input_file.name} is larger than {MAX_DOCUMENT_BYTES // (1024 * 1024)} MiB"

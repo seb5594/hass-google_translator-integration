@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026.11.26
+
+- **Security:** `google_translator.translate_structure` no longer overwrites existing YAML files. Before, `output_file` together with `overwrite: true` could replace files such as `configuration.yaml`, `secrets.yaml` or automations inside the configuration folder. YAML targets can only be created, and `overwrite` now applies to JSON files only. Writing a translated copy next to the original, such as `strings.de.json`, still works.
+
 ## 2026.19.11
 
 - Use YYYY.DD.MM for the first daily build and .2, .3 for subsequent builds.

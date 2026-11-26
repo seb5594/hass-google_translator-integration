@@ -157,7 +157,7 @@
         },
         "overwrite": {
           "name": "Überschreiben",
-          "description": "Die Ausgabedatei ersetzen, falls sie schon existiert."
+          "description": "Die Ausgabedatei ersetzen, falls sie schon existiert. Nur JSON-Dateien lassen sich ersetzen; eine vorhandene YAML-Datei wird nie überschrieben."
         },
         "target_language": {
           "name": "Zielsprache",

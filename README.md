@@ -160,7 +160,7 @@ to Google.*
 
 `google_translator.translate_structure` takes inline `data` or an `input_file`, translates only text
 values, never keys, skips identifiers such as URLs, entity IDs and icons, and keeps indentation, key
-order, quoting and comments of files. Use `only_keys` for configuration files and `dry_run: true`
+order, quoting and comments of files. Existing files are never touched by default: the result goes to a new file next to the original (`strings.de.json`), and `overwrite: true` replaces an existing **JSON** file only. An existing YAML file (such as `configuration.yaml`, `secrets.yaml` or your automations) is never overwritten, whatever the options say. Use `only_keys` for configuration files and `dry_run: true`
 to see what would be translated and how many characters it costs. Placeholders (`{name}`, `%s`,
 `{{ template }}`) are replaced by tokens and checked afterwards; if Google changes one, the call fails
 instead of writing a broken text.
