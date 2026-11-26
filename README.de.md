@@ -142,7 +142,7 @@ und das Monatsbudget. Lässt sie sich nicht vollständig übersetzen, scheitert 
 
 `google_translator.translate_structure` nimmt `data` direkt oder eine `input_file`, übersetzt nur Textwerte,
 nie Schlüssel, überspringt Kennungen wie URLs, Entitäts-IDs und Symbole und behält Einrückung,
-Schlüsselreihenfolge, Anführungszeichen und Kommentare von Dateien. Nutze `only_keys` für Konfigurationsdateien
+Schlüsselreihenfolge, Anführungszeichen und Kommentare von Dateien. Vorhandene Dateien bleiben standardmäßig unberührt: Das Ergebnis landet in einer neuen Datei neben dem Original (`strings.de.json`), und `overwrite: true` ersetzt nur eine vorhandene **JSON**-Datei. Eine vorhandene YAML-Datei (etwa `configuration.yaml`, `secrets.yaml` oder deine Automatisierungen) wird nie überschrieben, egal welche Optionen gesetzt sind. Nutze `only_keys` für Konfigurationsdateien
 und `dry_run: true`, um zu sehen, was übersetzt würde und wie viele Zeichen es kostet. Platzhalter (`{name}`,
 `%s`, `{{ template }}`) werden durch Marker ersetzt und danach geprüft; verändert Google einen, schlägt der
 Aufruf fehl, statt einen kaputten Text zu schreiben.

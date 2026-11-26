@@ -441,3 +441,35 @@ async def test_diagnostics_hide_the_api_key(hass, aioclient_mock):
     report = await async_get_config_entry_diagnostics(hass, entry)
     assert CLOUD_KEY not in json.dumps(report)
     assert report["capabilities"]["billed"] is True and report["usage"]["character_limit"] == 500000
+
+
+@pytest.mark.parametrize("name", ["configuration.yaml", "secrets.YML"])
+@pytest.mark.parametrize("overwrite", [False, True])
+async def test_an_existing_yaml_file_is_never_overwritten(hass, aioclient_mock, tmp_path, name, overwrite):
+    mock_web(aioclient_mock)
+    await add_account(hass)
+    hass.config.allowlist_external_dirs = {str(tmp_path)}
+    source = tmp_path / "en.json"
+    source.write_text('{"title": "Hello"}', encoding="utf-8")
+    target = tmp_path / name
+    target.write_text("homeassistant:\n  name: Home\n", encoding="utf-8")
+    with pytest.raises(HomeAssistantError, match="only JSON files can be replaced"):
+        await call(hass, "translate_structure", {"input_file": str(source), "output_file": str(target), "overwrite": overwrite})
+    assert target.read_text(encoding="utf-8") == "homeassistant:\n  name: Home\n"
+    assert not translate_calls(aioclient_mock)
+
+
+async def test_a_new_yaml_file_can_be_created_and_json_can_be_replaced_on_request(hass, aioclient_mock, tmp_path):
+    mock_web(aioclient_mock)
+    await add_account(hass)
+    hass.config.allowlist_external_dirs = {str(tmp_path)}
+    source = tmp_path / "en.yaml"
+    source.write_text("title: Hello\n", encoding="utf-8")
+    await call(hass, "translate_structure", {"input_file": str(source)})
+    assert (tmp_path / "en.de.yaml").read_text(encoding="utf-8") == "title: DE Hello\n"
+    out = tmp_path / "out.json"
+    out.write_text("{}", encoding="utf-8")
+    with pytest.raises(HomeAssistantError, match="already exists, set 'overwrite'"):
+        await call(hass, "translate_structure", {"input_file": str(source), "output_file": str(out)})
+    await call(hass, "translate_structure", {"input_file": str(source), "output_file": str(out), "overwrite": True})
+    assert "DE Hello" in out.read_text(encoding="utf-8")

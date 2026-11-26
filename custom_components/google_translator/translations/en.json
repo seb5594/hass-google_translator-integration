@@ -157,7 +157,7 @@
         },
         "overwrite": {
           "name": "Overwrite",
-          "description": "Replace the output file if it already exists."
+          "description": "Replace the output file if it already exists. Only JSON files can be replaced; an existing YAML file is never overwritten."
         },
         "target_language": {
           "name": "Target language",
